@@ -21,16 +21,11 @@
 'use strict';
 
 var HyperSwitch = require('hyperswitch');
+const URI = HyperSwitch.URI;
 var path = require('path');
-
 var fsUtil = require('../lib/FeatureServiceUtil');
 
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'examples.yaml'));
-
-// EXampleService
-function EXS(options) {
-    this.options = options;
-}
 
 const STEP_TO_SECONDS = {
     second:    1,
@@ -39,44 +34,78 @@ const STEP_TO_SECONDS = {
     day:   86400
 };
 
-/*
- * Function called from endpoint to generate a fake timeserie
- */
-EXS.prototype.fakeTimeserie = function(hyper, req) {
-    var requestParams = req.params;
 
-    fsUtil.validateFromAndTo(requestParams);
 
-    var fromDate = requestParams.fromDate;
-    var intervalSeconds = (requestParams.toDate - fromDate) / 1000;
-    var stepSeconds = STEP_TO_SECONDS[requestParams.step];
+class TimeserieTreament {
+	// Class that handles timeseries requests
 
-    if (stepSeconds > intervalSeconds) {
-        fsUtil.throwIfNeeded('Step should be smaller than [from, to[ interval');
-    }
+    constructor(options) {
+        this.options = options;
+	}
 
-    var stepNumbers = intervalSeconds / stepSeconds;
+	fakeTimeserie(hyper, req) {
+	    var requestParams = req.params;
 
-    return fsUtil.normalizeResponse({
-        status: 200,
-        body: {
-            items: [...Array(stepNumbers).keys()].map(idx => {
-                return {
-                    ts: (new Date(fromDate.getTime() + (idx * stepSeconds * 1000))).toISOString(),
-                    val: Math.random()
-                };
-            })
-        }
-    });
-};
+	    fsUtil.validateFromAndTo(requestParams);
+
+	    var fromDate = requestParams.fromDate;
+	    var intervalSeconds = (requestParams.toDate - fromDate) / 1000;
+	    var stepSeconds = STEP_TO_SECONDS[requestParams.step];
+
+	    if (stepSeconds > intervalSeconds) {
+	        fsUtil.throwIfNeeded('Step should be smaller than [from, to[ interval');
+	    }
+
+	    var stepNumbers = intervalSeconds / stepSeconds;
+
+	    return fsUtil.normalizeResponse({
+	        status: 200,
+	        body: {
+	            items: [...Array(stepNumbers).keys()].map(idx => {
+	                return {
+	                    ts: (new Date(fromDate.getTime() + (idx * stepSeconds * 1000))).toISOString(),
+	                    val: Math.random()
+	                };
+	            })
+	        }
+	    });
+	}
+
+	async meanTimeserie(hyper, req) {
+		// Returns mean of the timeserie specified in the request
+
+		var requestParams = req.params;
+	    fsUtil.validateFromAndTo(requestParams);
+
+		// Build the uri used to request the timeserie
+		const uriFakeTS = new URI([requestParams.domain, 'sys', 'examples',
+			'fake-timeserie',requestParams.from,
+			requestParams.to,requestParams.step]);
+
+		// Request the timeserie, wait for the response and store the result
+		var mean = await hyper.get({ uri: uriFakeTS }).then((res) =>
+			res.body.items.map(items => items.val).
+				reduce((prev, next) => prev + next, 0)/res.body.items.length);
+
+	    return fsUtil.normalizeResponse({
+	        status: 200,
+	        body: {
+	            items:
+					mean // return the mean in the response
+			}
+	    });
+
+	};
+}
 
 module.exports = function(options) {
-    var exs = new EXS(options);
+	var tst = new TimeserieTreament(options);
 
     return {
         spec: spec,
         operations: {
-            fakeTimeserie: exs.fakeTimeserie.bind(exs)
+            fakeTimeserie: tst.fakeTimeserie.bind(tst),
+			meanTimeserie: tst.meanTimeserie.bind(tst)
         }
     };
 };

@@ -23,3 +23,8 @@ paths:
         get:
           summary: Get a fake timeserie
           operationId: fakeTimeserie
+
+    /mean-timeserie/{from}/{to}/{step}:
+        get:
+          summary: Get a fake timeserie
+          operationId: meanTimeserie

@@ -33,6 +33,7 @@ paths:
               x-modules:
                 - path: v1/examples.yaml
 
+
   /{api:sys}:
     x-modules:
       - spec:
