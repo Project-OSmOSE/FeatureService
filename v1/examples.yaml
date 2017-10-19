@@ -173,4 +173,12 @@ definitions:
   mean-timeserie:
     properties:
       items:
-        type: double
+        type: array
+        items:
+          properties:
+            startts:
+              type : string
+            endts:
+              type : string
+            mean:
+              type: double

@@ -33,7 +33,6 @@ paths:
               x-modules:
                 - path: v1/examples.yaml
 
-
   /{api:sys}:
     x-modules:
       - spec:
@@ -41,4 +40,4 @@ paths:
           paths:
             /examples:
               x-modules:
-                - path: sys/examples.js
+                - path: sys/timeserietreatment.js
