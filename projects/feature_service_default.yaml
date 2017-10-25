@@ -40,4 +40,4 @@ paths:
           paths:
             /examples:
               x-modules:
-                - path: sys/timeserietreatment.js
+                - path: sys/examples.js

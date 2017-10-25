@@ -25,7 +25,7 @@ const URI = HyperSwitch.URI;
 var path = require('path');
 var fsUtil = require('../lib/FeatureServiceUtil');
 
-var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'timeserietreatment.yaml'));
+var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'examples.yaml'));
 
 const STEP_TO_SECONDS = {
     second:    1,
@@ -36,7 +36,7 @@ const STEP_TO_SECONDS = {
 
 
 
-class TimeserieTreament {
+class ExampleOfTimeserieTreament {
     // Class that handles timeseries requests
 
     constructor(options) {
@@ -90,22 +90,39 @@ class TimeserieTreament {
                     items: {
                         startts: requestParams.fromDate,
                         endts: requestParams.toDate,
+                        length: -1,
                         mean: -1 // return the mean in the response
                     }
                 }
             });
 
-        // Request the timeserie, wait for the response and store the result
-        var mean = hyper.get({ uri: uriFakeTS }).then((res) =>
-            response.body.items.mean = res.body.items.map(items => items.val).
-                reduce((prev, next) => prev + next, 0) / res.body.items.length);
+        /*
+        return hyper.get({ uri: uriFakeTS }).then((res) => {
+                    res.status = 200;
+                    res.body = { items: {
+                        startts: requestParams.fromDate,
+                        endts: requestParams.toDate,
+                        length: res.body.items.length,
+                        mean: res.body.items.map(items => items.val).
+                            reduce((prev, next) => prev + next, 0) / res.body.items.length
+                        }};
+                }
+            );*/
+
+        // Request the timeserie, wait for the response and modify the response
+        // in order to put the correct values in it.
+        hyper.get({ uri: uriFakeTS }).then((res) => {
+                response.body.items.mean = res.body.items.map(items => items.val).
+                    reduce((prev, next) => prev + next, 0) / res.body.items.length;
+                response.body.items.length = res.body.items.length;
+            });
 
         return response;
     }
 }
 
 module.exports = function(options) {
-    var tst = new TimeserieTreament(options);
+    var tst = new ExampleOfTimeserieTreament(options);
 
     return {
         spec: spec,
