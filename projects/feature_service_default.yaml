@@ -41,3 +41,4 @@ paths:
             /examples:
               x-modules:
                 - path: sys/examples.js
+        options: '{{options}}'

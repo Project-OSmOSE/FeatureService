@@ -21,10 +21,23 @@
 feature_service_project: &feature_service_project
   x-modules:
     - path: projects/feature_service_default.yaml
+      options: &default_options
+        elasticSearch:
+          scheme: http
+          host: localhost
+          port: 9200
+          index: ebdo_data
 
 # Swagger spec root.
 spec: &spec_root
   title: "The EBDO FeatureService root"
+  x-sub-request-filters:
+    - type: default
+      name: http
+      options:
+        allow:
+          - pattern: /^http:\/\/localhost:9200\/.*/
+            forward_headers: true
   paths:
     /{domain:data.ebdo.org}: *feature_service_project
 
