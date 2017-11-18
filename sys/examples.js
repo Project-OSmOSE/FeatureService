@@ -84,21 +84,9 @@ class ExampleOfTimeserieTreament {
             'fake-timeserie',requestParams.from,
             requestParams.to,requestParams.step]);
 
-        var response = fsUtil.normalizeResponse({
-                status: 200,
-                body: {
-                    items: {
-                        startts: requestParams.fromDate,
-                        endts: requestParams.toDate,
-                        length: -1,
-                        mean: -1 // return the mean in the response
-                    }
-                }
-            });
-
-        /*
-        return hyper.get({ uri: uriFakeTS }).then((res) => {
-                    res.status = 200;
+        // Request the timeserie, wait for the response and modify the response
+        // in order to put the correct values in the response.
+        return hyper.get({ uri: uriFakeTS }).then(function (res)  {
                     res.body = { items: {
                         startts: requestParams.fromDate,
                         endts: requestParams.toDate,
@@ -106,18 +94,10 @@ class ExampleOfTimeserieTreament {
                         mean: res.body.items.map(items => items.val).
                             reduce((prev, next) => prev + next, 0) / res.body.items.length
                         }};
+                    return res;
                 }
-            );*/
+            );
 
-        // Request the timeserie, wait for the response and modify the response
-        // in order to put the correct values in it.
-        hyper.get({ uri: uriFakeTS }).then((res) => {
-                response.body.items.mean = res.body.items.map(items => items.val).
-                    reduce((prev, next) => prev + next, 0) / res.body.items.length;
-                response.body.items.length = res.body.items.length;
-            });
-
-        return response;
     }
 }
 
