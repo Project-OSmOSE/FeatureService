@@ -36,13 +36,8 @@ paths:
   /{api:sys}:
     x-modules:
       - spec:
-        options: '{{options}}'
           # Careful - There are 2 indentations here
           paths:
             /examples:
               x-modules:
                 - path: sys/examples.js
-            /search:
-              x-modules:
-                - path: sys/search.js
-                elastic_search: '{{options.elastic_search}}'
