@@ -26,5 +26,5 @@ paths:
 
     /mean-timeserie/{from}/{to}/{step}:
         get:
-          summary: Get the mean of a fake timeserie
+          summary: Get a fake timeserie
           operationId: meanTimeserie
