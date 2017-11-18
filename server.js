@@ -23,4 +23,4 @@
 "use strict";
 
 var ServiceRunner = require('service-runner');
-new ServiceRunner().run();
+new ServiceRunner().start();
