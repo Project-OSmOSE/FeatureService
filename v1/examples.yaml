@@ -168,7 +168,8 @@ definitions:
             ts:
               type : string
             val:
-              type: double
+              type: number
+              format: double
 
   mean-timeserie:
     properties:
@@ -181,4 +182,5 @@ definitions:
             endts:
               type : string
             mean:
-              type: double
+              type: number
+              format: double
