@@ -36,7 +36,7 @@ const STEP_TO_SECONDS = {
 
 
 
-class ExampleOfTimeserieTreament {
+class Example {
     // Class that handles timeseries requests
 
     constructor(options) {
@@ -102,7 +102,7 @@ class ExampleOfTimeserieTreament {
 }
 
 module.exports = function(options) {
-    var tst = new ExampleOfTimeserieTreament(options);
+    var tst = new Example(options);
 
     return {
         spec: spec,
