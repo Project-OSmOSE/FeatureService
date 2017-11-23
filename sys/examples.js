@@ -86,14 +86,14 @@ class ExampleOfTimeserieTreament {
 
         // Request the timeserie, wait for the response and modify the response
         // in order to put the correct values in the response.
-        return hyper.get({ uri: uriFakeTS }).then(function (res)  {
-                    res.body = { items: [ {
-                        startts: requestParams.fromDate,
-                        endts: requestParams.toDate,
-                        length: res.body.items.length,
-                        mean: res.body.items.map(items => items.val).
-                            reduce((prev, next) => prev + next, 0) / res.body.items.length
-                        }]};
+        return hyper.get({ uri: uriFakeTS }).then(function(res)  {
+                    res.body = { items: [{
+                            startts: requestParams.fromDate,
+                            endts: requestParams.toDate,
+                            length: res.body.items.length,
+                            mean: res.body.items.map(items => items.val).
+                              reduce((prev, next) => prev + next, 0) / res.body.items.length
+                        }] };
                     return res;
                 }
             );

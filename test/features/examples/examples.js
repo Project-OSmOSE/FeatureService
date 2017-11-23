@@ -115,10 +115,13 @@ describe('examples endpoints', function () {
             uri: server.config.fsURL + endpointMean + '/2017-01-01/2017-02-01/day'
         }).then(function(res) {
             assert.deepEqual(res.status, 200);
-            //assert.deepEqual(res.body.items.length, 4);
+            //assert.deepEqual(res.body.items[0].length, 4);
             // checking first and last timestamps
-            assert.deepStrictEqual(res.body.items.startts, '2017-01-01T00:00:00.000Z');
-            assert.deepStrictEqual(res.body.items.endts, '2017-02-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].startts, '2017-01-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].endts, '2017-02-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].length, 31);
+            assert.deepStrictEqual(typeof(res.body.items[0].mean), 'number');
+            assert.deepStrictEqual(0 < res.body.items[0].mean && res.body.items[0].mean < 1, true);
 
         });
     });
@@ -129,8 +132,11 @@ describe('examples endpoints', function () {
         }).then(function(res) {
             assert.deepEqual(res.status, 200);
             // checking first and last timestamps
-            assert.deepStrictEqual(res.body.items.startts, '2017-01-01T00:00:00.000Z');
-            assert.deepStrictEqual(res.body.items.endts, '2017-01-02T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].startts, '2017-01-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].endts, '2017-01-02T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].length, 24);
+            assert.deepStrictEqual(typeof(res.body.items[0].mean), 'number');
+            assert.deepStrictEqual(0 < res.body.items[0].mean && res.body.items[0].mean < 1, true);
         });
     });
 
@@ -140,8 +146,11 @@ describe('examples endpoints', function () {
         }).then(function(res) {
             assert.deepEqual(res.status, 200);
             // checking first and last timestamps
-            assert.deepStrictEqual(res.body.items.startts, '2017-01-01T00:00:00.000Z');
-            assert.deepStrictEqual(res.body.items.endts, '2017-01-01T01:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].startts, '2017-01-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].endts, '2017-01-01T01:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].length, 60);
+            assert.deepStrictEqual(typeof(res.body.items[0].mean), 'number');
+            assert.deepStrictEqual(0 < res.body.items[0].mean && res.body.items[0].mean < 1, true);
         });
     });
 
@@ -151,8 +160,11 @@ describe('examples endpoints', function () {
         }).then(function(res) {
             assert.deepEqual(res.status, 200);
             // checking first and last timestamps
-            assert.deepStrictEqual(res.body.items.startts, '2017-01-01T00:00:00.000Z');
-            assert.deepStrictEqual(res.body.items.endts, '2017-01-01T00:01:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].startts, '2017-01-01T00:00:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].endts, '2017-01-01T00:01:00.000Z');
+            assert.deepStrictEqual(res.body.items[0].length, 60);
+            assert.deepStrictEqual(typeof(res.body.items[0].mean), 'number');
+            assert.deepStrictEqual(0 < res.body.items[0].mean && res.body.items[0].mean < 1, true);
         });
     });
 
