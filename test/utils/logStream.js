@@ -14,7 +14,7 @@ function logStream() {
     level: 'warn'
   });
 
-  function write(chunk) {
+  function write(chunk, encoding, callback) {
     try {
         var entry = JSON.parse(chunk);
         var levelMatch = /^(\w+)/.exec(entry.levelPath);
@@ -32,7 +32,7 @@ function logStream() {
   }
 
   // to implement the stream writer interface
-  function end() {
+  function end(chunk, encoding, callback) {
   }
 
   function get() {
