@@ -26,7 +26,6 @@ feature_service_project: &feature_service_project
           scheme: http
           host: localhost
           port: 9200
-          index: ebdo_data
 
 # Swagger spec root.
 spec: &spec_root
