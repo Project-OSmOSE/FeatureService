@@ -11,9 +11,5 @@
     "worker": true,
     "mocha": true
   },
-  "extends": "eslint:recommended",
-  "rules": {
-    "no-unused-vars": "off",
-    "no-console": "off"
-  }
+  "extends": "eslint:recommended" 
 }
