@@ -31,7 +31,7 @@ function logStream() {
     log.push(chunk);
   }
 
-  // to implement the stream writer interface end(chunk, encoding, callback)
+  // to implement the stream writer interface
   function end() {
   }
 
