@@ -110,7 +110,6 @@ function deepStrictEqual(result, expected, message) {
 }
 
 function isSuperset(parent, child) {
-    var result = true;
     if (child instanceof Object) {
         for (var k in child) {
             isSuperset(parent[k], child[k]);
@@ -171,4 +170,3 @@ module.exports.contentType        = contentType;
 module.exports.localRequests      = localRequests;
 module.exports.remoteRequests     = remoteRequests;
 module.exports.findParsoidRequest = findParsoidRequest;
-

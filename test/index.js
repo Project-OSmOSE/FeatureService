@@ -1,6 +1,6 @@
 /*
  * Mocha Test setup
- * Copied Restbase
+ * Copied Restbase & modified
  */
 'use strict';
 
