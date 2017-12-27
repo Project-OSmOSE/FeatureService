@@ -27,3 +27,4 @@ paths:
           paths:
             /fake-es:
               x-modules:
+                - path: test/features/fake-es/fake-es.js

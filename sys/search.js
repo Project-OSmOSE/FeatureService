@@ -21,7 +21,6 @@
 'use strict';
 
 var HyperSwitch = require('hyperswitch');
-const URI = HyperSwitch.URI;
 var path = require('path');
 const HTTPError = HyperSwitch.HTTPError;
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'search.yaml'));
@@ -96,8 +95,8 @@ class Search {
             query: {
                 range: {
                     timestamp: {
-                        gte: requestParams.from,
-                        lt: requestParams.to
+                        gte: req.params.from,
+                        lt: req.params.to
                     }
                 }
             },
