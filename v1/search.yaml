@@ -1,0 +1,150 @@
+# Copyright (C) 2017 Project-EBDO
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Hyperswitch configuration for EBDO-FeatureService api:examples endpoints
+# Author:
+
+
+swagger: '2.0'
+info:
+  version: '1.0.0-beta'
+  title: EBDO FeatureService Examples API
+  description: EBDO FeatureService Examples API
+  termsofservice: TBD
+  contact:
+    name: EBDO-Project Team
+    email: TBD
+    url: TBD
+  license:
+    name: GNU General Public Licence, v3
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+paths:
+  /:
+    get:
+      tags:
+        - EBDO FeatureService Examples
+      summary: List EBDO FeatureService API entry points
+      description: |
+        This is the root of the EBDO FeatureService ES searches
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queriable sub-items
+          schema:
+            $ref: '#/definitions/listing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-monitor: false
+
+  /get-all/{index}:
+    get:
+      tags:
+        - EBDO FeatureService search
+      summary: Get a fake timeserie
+      description: |
+        Get all documents from an Elasticsearch index
+      produces:
+        - application/json
+      parameters:
+        - name: index
+          in: path
+          description: The index of Elasticsearch to search the documents from.
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The documents of the index.
+          # the two lines that follows must be uncommented asap, ie define the form of the response
+          #schema:
+          #  $ref: '#/definitions/get-all'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-request-handler:
+        - get_from_backend:
+            request:
+              uri: /{domain}/sys/search/get-all/{index}
+      x-monitor: false
+
+  /range-query/{index}/{from}/{to}:
+    get:
+      tags:
+        - EBDO FeatureService search
+      summary: Get a fake timeserie
+      description: |
+        Get all documents from an Elasticsearch index
+      produces:
+        - application/json
+      parameters:
+        - name: index
+          in: path
+          description: The index of Elasticsearch to search the documents from.
+          type: string
+          required: true
+        - name: from
+          in: path
+          description: Start of the wanted time range. Expecting YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS formats.
+          type: string
+          required: true
+        - name: to
+          in: path
+          description: End of the wanted time range. Expecting YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS formats.
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The documents within the time range at the given index.
+          # the two lines that follows must be uncommented asap, ie define the form of the response
+          #schema:
+          #  $ref: '#/definitions/get-all'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-request-handler:
+        - get_from_backend:
+            request:
+              uri: /{domain}/sys/search/range-query/{index}/{from}/{to}
+      x-monitor: false
+
+definitions:
+  # A https://tools.ietf.org/html/draft-nottingham-http-problem
+  problem:
+    required:
+      - type
+    properties:
+      type:
+        type: string
+      title:
+        type: string
+      detail:
+        type: string
+      instance:
+        type: string
+
+  listing:
+    description: The result format for listings
+    required:
+      - items
+    properties:
+      items:
+        type: array
+        items:
+          type: string

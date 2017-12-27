@@ -22,7 +22,7 @@ paths:
   /{api:v1}:
     x-modules:
       - spec:
-          # Careful - There are 2 indentations here
+        # Careful - There are 2 indentations here
           info:
             version: 1.0.0-beta
             title: EBDO FeatureService API
@@ -32,13 +32,21 @@ paths:
             /examples:
               x-modules:
                 - path: v1/examples.yaml
+            /search:
+              x-modules:
+                - path: v1/search.yaml
 
   /{api:sys}:
     x-modules:
       - spec:
-          # Careful - There are 2 indentations here
+        # Careful - There are 2 indentations here
           paths:
             /examples:
               x-modules:
                 - path: sys/examples.js
+            /search:
+              x-modules:
+                - path: sys/search.js
+                  options:
+                    elasticSearch: '{{options.elasticSearch}}'
         options: '{{options}}'
