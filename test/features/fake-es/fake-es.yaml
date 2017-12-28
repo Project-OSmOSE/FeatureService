@@ -1,0 +1,5 @@
+paths:
+    /es/{index}/{method}:
+        get:
+          summary: Test endpointing receiving test ES queries and sending back expected results.
+          operationId: query
