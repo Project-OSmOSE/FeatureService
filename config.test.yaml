@@ -21,12 +21,7 @@
 # A synthetic domain to test EBDO-FeatureService
 default_project: &default_project
   x-modules:
-    - path: test/test.yaml
     - path: projects/feature_service_default.yaml
-      options: &default_options
-        elasticSearch:
-          path: /data.ebdo.org/sys/fake-es/es
-
 
 spec_root: &spec_root
   title: "The EBDO FeatureService root"
