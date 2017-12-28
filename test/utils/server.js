@@ -48,7 +48,7 @@ function start(_options) {
                 + (options.offline ? 'OFFLINE' : 'ONLINE') + ' mode');
         config.conf.offline = options.offline || false;
 
-        return runner.run(config.conf)
+        return runner.start(config.conf)
         .then(function(servers){
             var server = servers[0];
             isRunning = true;
