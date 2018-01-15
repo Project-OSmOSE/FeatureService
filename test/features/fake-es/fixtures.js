@@ -1,5 +1,10 @@
+/*
+ * EBDO-FeatureService fixtures used to test ES endpoints
+ * Author:
+ *
+ * fs stands for FeatureService
+ */
 
-// fs stands for FeatureService
 
 
 
@@ -9,7 +14,7 @@
 
 
 /******************************************************************************
-                                fixtures
+                            fixtures
 *****************************************************************************/
 
 
