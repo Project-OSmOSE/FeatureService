@@ -15,14 +15,14 @@
 
 
 # Hyperswitch configuration for EBDO-FeatureService api:examples endpoints
-# Author:
+# Author: Alexandre Degurse
 
 
 swagger: '2.0'
 info:
   version: '1.0.0-beta'
-  title: EBDO FeatureService Examples API
-  description: EBDO FeatureService Examples API
+  title: EBDO FeatureService Search API
+  description: EBDO FeatureService Search API
   termsofservice: TBD
   contact:
     name: EBDO-Project Team
@@ -35,7 +35,7 @@ paths:
   /:
     get:
       tags:
-        - EBDO FeatureService Examples
+        - EBDO FeatureService Search
       summary: List EBDO FeatureService API entry points
       description: |
         This is the root of the EBDO FeatureService ES searches
@@ -56,9 +56,9 @@ paths:
     get:
       tags:
         - EBDO FeatureService search
-      summary: Get a fake timeserie
+      summary: Get all documents at given index
       description: |
-        Get all documents from an Elasticsearch index
+        Gets all documents stored in Elasticsearch at the given index.
       produces:
         - application/json
       parameters:
@@ -86,10 +86,10 @@ paths:
   /range-query/{index}/{from}/{to}:
     get:
       tags:
-        - EBDO FeatureService search
-      summary: Get a fake timeserie
+        - EBDO FeatureService Search
+      summary: Get all documents from given index and within time range
       description: |
-        Get all documents from an Elasticsearch index
+        Gets all documents from ElasticSearch at given index and within time range. 
       produces:
         - application/json
       parameters:

@@ -12,11 +12,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 
-/*
  * EBDO-FeatureService Search functions
- * Author:
+ * Author: Alexandre Degurse
  */
 'use strict';
 
@@ -58,7 +56,7 @@ class Search {
     buildRequest(index,query) {
         // Generate a http request to Elasticsearch
         return {
-            uri: Search.requestURI(this.elasticSearch) + '/' + index + '/_search',
+            uri: `${Search.requestURI(this.elasticSearch)}/${index}/_search`,
             headers: { "Content-Type": "application/json" },
             body: query
         };
