@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 /*
  * EBDO-FeatureService fixtures used to test ES endpoints
  * Author: Alexandre Degurse
@@ -118,6 +118,8 @@ const fakeEsResponse = function(timeSerie,esIndex) {
     return esRes;
 }
 
+
+
 /******************************************************************************
                             fixtures
 *****************************************************************************/
@@ -126,19 +128,23 @@ const getAllFixtures = [
 
     {
         describe: 'return 200 and results for get-all with sample ts',
-        fsEndpoint: '/data.ebdo.org/v1/search/get-all',
+        fsEndpoint: '/search/get-all/fakeIndex',
         expectedIndex: "fakeIndex",
         expectedEsQuery: {"size":10000,"query":{"match_all":{}}},
-        esResult: fakeEsResponse(fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"fakeTobIndex")
-        //expectedFSResult: makeTopEditorsPerEditsAqsResult('all-editor-types', 'all-page-types', 'daily')
+        esResult: fakeEsResponse(fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"fakeTobIndex"),
+        get expectedFSResult() { return {
+            status: 200,
+            body: {items: this.esResult.hits.hits.map((hit) => hit._source)}
+            };
+        }
     }
 
 ]
 
 const rangeQueryFixtures = [
     {
-        describe: 'return 200 and results for get-all with sample ts',
-        fsEndpoint: '/data.ebdo.org/v1/search/get-all',
+        describe: 'return 200 and results for range-query with sample ts',
+        fsEndpoint: '/search/range-query/fakeTobIndex/2017-12-01T12:00:00.000Z/2017-12-01T20:00:00.000Z',
         expectedIndex: "fakeTobIndex",
         expectedEsQuery: {
             size: 10000,
@@ -154,8 +160,12 @@ const rangeQueryFixtures = [
                 { timestamp: { order: "asc" } }
             ]
         },
-        esResult: fakeEsResponse(fakeTimeserieTob("2017-12-01T12:00:00.000Z",120,60),"fakeTobIndex")
-        //expectedFSResult: makeTopEditorsPerEditsAqsResult('all-editor-types', 'all-page-types', 'daily')
+        esResult: fakeEsResponse(fakeTimeserieTob("2017-12-01T12:00:00.000Z",120,60),"fakeTobIndex"),
+        get expectedFSResult() { return {
+            status: 200,
+            body: {items: this.esResult.hits.hits.map((hit) => hit._source)}
+            };
+        }
     }
 ]
 

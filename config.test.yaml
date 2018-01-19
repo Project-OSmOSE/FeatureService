@@ -21,12 +21,12 @@
 # A synthetic domain to test EBDO-FeatureService
 default_project: &default_project
   x-modules:
-    - path: test/test.yaml
+    - path: test/fs-test-module.yaml
     - path: projects/feature_service_default.yaml
       options: &default_options
         elasticSearch:
           path: /data.ebdo.org/sys/fake-es/es
-          maximumSize: 1000
+          maximumSize: 10000
 
 
 spec_root: &spec_root
