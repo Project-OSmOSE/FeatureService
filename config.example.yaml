@@ -26,6 +26,7 @@ feature_service_project: &feature_service_project
           scheme: http
           host: localhost
           port: 9200
+          maximumSize: 1000
 
 # Swagger spec root.
 spec: &spec_root

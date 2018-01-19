@@ -68,7 +68,7 @@ class Search {
         const index = req.params.index;
 
         var query = JSON.stringify({
-            size: 10000,
+            size: this.elasticSearch.maximumSize,
             query: {
                     match_all: {}
                 }
@@ -89,7 +89,7 @@ class Search {
         const index = req.params.index;
 
         var query = JSON.stringify({
-            size: 10000,
+            size: this.elasticSearch.maximumSize,
             query: {
                 range: {
                     timestamp: {

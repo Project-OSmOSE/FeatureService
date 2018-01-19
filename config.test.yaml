@@ -26,6 +26,7 @@ default_project: &default_project
       options: &default_options
         elasticSearch:
           path: /data.ebdo.org/sys/fake-es/es
+          maximumSize: 1000
 
 
 spec_root: &spec_root
