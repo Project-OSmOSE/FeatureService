@@ -42,7 +42,7 @@ describe('search endpoints', function () {
                 uri: uri
             }).then(res => {
                 if (fixture.expectedFSResult) {
-                    assertBase.strictEqual(res.status, fixture.expectedFSResult.status);
+                    assert.deepEqual(res.status, fixture.expectedFSResult.status);
                     assert.deepEqual(res.body, fixture.expectedFSResult.body);
                 }
             }).catch(res => {

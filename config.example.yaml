@@ -27,6 +27,7 @@ feature_service_project: &feature_service_project
           host: localhost
           port: 9200
           maximumSize: 1000
+          index: ebdo_data
 
 # Swagger spec root.
 spec: &spec_root

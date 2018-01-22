@@ -20,6 +20,7 @@
 
 var HyperSwitch = require('hyperswitch');
 var path = require('path');
+var fsUtil = require('../lib/FeatureServiceUtil.js');
 const HTTPError = HyperSwitch.HTTPError;
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'search.yaml'));
 
@@ -62,10 +63,9 @@ class Search {
         };
     }
 
-    getAll(hyper, req) {
+    getAll(hyper) {
         // Requests Elasticsearch with an empty search at a given index
-        // ie: gets all documents at the given index
-        const index = req.params.index;
+        // ie: gets all documents at the default ebdo index
 
         var query = JSON.stringify({
             size: this.elasticSearch.maximumSize,
@@ -75,18 +75,17 @@ class Search {
         });
 
         return hyper.get(
-                            this.buildRequest(index,query))
+                            this.buildRequest(this.elasticSearch.index,query))
             .then((res) => {
                             res.body = { items: res.body.hits.hits.map((hit) => hit._source) };
                             return res;
-                        })
-            .catch((err) => err);
+                        }
+            )
+            .catch(fsUtil.esError);
     }
 
     rangeQuery(hyper,req) {
-        // Requests Elasticsearch with a time based range query on a index
-
-        const index = req.params.index;
+        // Requests Elasticsearch with a time based range query on default ES index
 
         var query = JSON.stringify({
             size: this.elasticSearch.maximumSize,
@@ -104,12 +103,13 @@ class Search {
         });
 
         return hyper.get(
-                            this.buildRequest(index,query))
+                            this.buildRequest(this.elasticSearch.index,query))
+
             .then((res) => {
                             res.body = { items: res.body.hits.hits.map((hit) => hit._source) };
                             return res;
                         })
-            .catch((err) => err);
+            .catch(fsUtil.esError);
     }
 }
 

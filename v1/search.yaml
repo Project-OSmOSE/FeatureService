@@ -52,21 +52,15 @@ paths:
             $ref: '#/definitions/problem'
       x-monitor: false
 
-  /get-all/{index}:
+  /get-all:
     get:
       tags:
         - EBDO FeatureService search
       summary: Get all documents at given index
       description: |
-        Gets all documents stored in Elasticsearch at the given index.
+        Gets all documents stored in Elasticsearch at the default index.
       produces:
         - application/json
-      parameters:
-        - name: index
-          in: path
-          description: The index of Elasticsearch to search the documents from.
-          type: string
-          required: true
       responses:
         '200':
           description: The documents of the index.
@@ -80,24 +74,19 @@ paths:
       x-request-handler:
         - get_from_backend:
             request:
-              uri: /{domain}/sys/search/get-all/{index}
+              uri: /{domain}/sys/search/get-all
       x-monitor: false
 
-  /range-query/{index}/{from}/{to}:
+  /range-query/{from}/{to}:
     get:
       tags:
         - EBDO FeatureService Search
       summary: Get all documents from given index and within time range
       description: |
-        Gets all documents from ElasticSearch at given index and within time range. 
+        Gets all documents from ElasticSearch at given index and within time range.
       produces:
         - application/json
       parameters:
-        - name: index
-          in: path
-          description: The index of Elasticsearch to search the documents from.
-          type: string
-          required: true
         - name: from
           in: path
           description: Start of the wanted time range. Expecting YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS formats.
@@ -121,7 +110,7 @@ paths:
       x-request-handler:
         - get_from_backend:
             request:
-              uri: /{domain}/sys/search/range-query/{index}/{from}/{to}
+              uri: /{domain}/sys/search/range-query/{from}/{to}
       x-monitor: false
 
 definitions:
