@@ -134,6 +134,103 @@ paths:
               uri: /{domain}/sys/examples/fake-timeserie/{from}/{to}/{step}
       x-monitor: false
 
+  /fake-post/{url_param}:
+    post:
+      tags:
+        - EBDO FeatureService Examples
+      summary: Fake post endpoint
+      description: |
+        Fake post endpoint returning the parameters given in url and in body,
+        using url-value as key to the body-value.
+      produces:
+        - application/json
+      parameters:
+        - name: url_param
+          in: path
+          description: A fake url parameter
+          type: string
+          required: true
+        - name: body_param
+          in: formData
+          description: A fake body parameter
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The parameters provided
+          schema:
+            $ref: '#/definitions/post-parameters'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-request-handler:
+        - post_to_backend:
+            request:
+              method: post
+              uri: /{domain}/sys/examples/fake-post/{url_param}
+              headers:
+                content-type: multipart/form-data
+              body:
+                body_param: '{{body_param}}'
+      x-monitor: false
+
+  /fake-chain:
+    post:
+      tags:
+        - EBDO FeatureService Examples
+      summary: Fake-chain endpoint using post
+      description: |
+        Fake chain using fake-post two times is a row
+      produces:
+        - application/json
+      parameters:
+        - name: chain_body_param
+          in: formData
+          description: A fake body parameter for validity
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The parameters provided
+          schema:
+            $ref: '#/definitions/post-parameters'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-request-handler:
+        # First step - Dummy call to fake-post
+        - validate_first_step:
+            request:
+              method: post
+              uri: /{domain}/sys/examples/fake-post/fake-chain-1
+              headers:
+                content-type: multipart/form-data
+              body:
+                body_param: '{{chain_body_param}}'
+
+        - execute_second_step:
+            request:
+              method: post
+              uri: /{domain}/sys/examples/fake-post/fake-chain-2
+              headers:
+                content-type: multipart/form-data
+              body:
+                body_param: value-fake-chain-2
+
+        - return_step:
+            return:
+              status: 200
+              headers: '{{execute_second_step.headers}}'
+              body: '{{execute_second_step.body}}'
+
+      x-monitor: false
+
+
+
+
+
 definitions:
   # A https://tools.ietf.org/html/draft-nottingham-http-problem
   problem:
@@ -184,3 +281,10 @@ definitions:
             mean:
               type: number
               format: double
+
+  post-parameters:
+    properties:
+      url_parameter:
+        type: string
+      body_parameter:
+        type: string

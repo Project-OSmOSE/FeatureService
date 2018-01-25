@@ -72,7 +72,6 @@ class Example {
         });
     }
 
-
     meanTimeserie(hyper, req) {
         // Returns mean of the timeserie specified in the request
 
@@ -99,16 +98,27 @@ class Example {
             );
 
     }
+
+    fakePost(hyper, req) {
+        // Build simple response out of url and body params
+        var body = {};
+        body[req.params.url_param] = req.body.body_param;
+        return fsUtil.normalizeResponse({
+            status: 200,
+            body: body
+        });
+    }
 }
 
 module.exports = function(options) {
-    var tst = new Example(options);
+    var example = new Example(options);
 
     return {
         spec: spec,
         operations: {
-            fakeTimeserie: tst.fakeTimeserie.bind(tst),
-            meanTimeserie: tst.meanTimeserie.bind(tst)
+            fakeTimeserie: example.fakeTimeserie.bind(example),
+            meanTimeserie: example.meanTimeserie.bind(example),
+            fakePost: example.fakePost.bind(example)
         }
     };
 };

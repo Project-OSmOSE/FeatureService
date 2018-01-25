@@ -28,3 +28,17 @@ paths:
         get:
           summary: Get the mean of a fake timeserie
           operationId: meanTimeserie
+
+    /fake-post/{url_param}:
+        post:
+          summary: Test a post endpoint
+          operationId: fakePost
+          parameters:
+            - name: url_param
+              in: path
+              type: string
+              required: true
+            - name: body_param
+              in: formData
+              type: string
+              required: true
