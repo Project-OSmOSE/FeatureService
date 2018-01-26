@@ -16,6 +16,10 @@ describe('examples endpoints', function () {
     //Start server before running tests
     before(function () { return server.start(); });
 
+    // ************************************
+    // fake-timeserie
+    // ************************************
+
     var endpoint = '/examples/fake-timeserie';
 
     // Test Endpoint
@@ -91,6 +95,10 @@ describe('examples endpoints', function () {
             assert.deepStrictEqual(res.body.items[59].ts, '2017-01-01T00:00:59.000Z');
         });
     });
+
+    // ************************************
+    // mean-fake-timeserie
+    // ************************************
 
     var endpointMean = '/examples/mean-fake-timeserie';
 
@@ -168,5 +176,63 @@ describe('examples endpoints', function () {
         });
     });
 
+
+    // ************************************
+    // fake-post
+    // ************************************
+
+    var endpointPost = '/examples/fake-post';
+
+    it('should return 404 when no url_param is set (wrong URL pattern)', function () {
+        return preq.post({
+            uri: server.config.fsURL + endpointPost
+        }).catch(function(res) {
+            assert.deepEqual(res.status, 404);
+        });
+    });
+
+    it('should return 400 when url_param is set but not body_param', function () {
+        return preq.post({
+            uri: server.config.fsURL + endpointPost + '/url_value'
+        }).catch(function(res) {
+            assert.deepEqual(res.status, 400);
+        });
+    });
+
+    it('should return 200 with url_param and body_param in response body', function () {
+        return preq.post({
+            uri: server.config.fsURL + endpointPost + '/url_value',
+            headers: { 'content-type': 'multipart/form-data'},
+            body: { body_param: 'body_value' }
+        }).then(function(res) {
+            assert.deepEqual(res.status, 200);
+            assert.deepStrictEqual(res.body.url_value, 'body_value');
+        });
+    });
+
+    // ************************************
+    // fake-chain
+    // ************************************
+
+    var endpointChain = '/examples/fake-chain';
+
+    it('should return 400 when body_param is not set', function () {
+        return preq.post({
+            uri: server.config.fsURL + endpointChain
+        }).catch(function(res) {
+            assert.deepEqual(res.status, 400);
+        });
+    });
+
+    it('should return 200 with correct response body when body_param is set', function () {
+        return preq.post({
+            uri: server.config.fsURL + endpointChain,
+            headers: { 'content-type': 'multipart/form-data'},
+            body: { chain_body_param: 'dummy' }
+        }).then(function(res) {
+            assert.deepEqual(res.status, 200);
+            assert.deepStrictEqual(res.body['fake-chain-2'], 'value-fake-chain-2');
+        });
+    });
 
 });
