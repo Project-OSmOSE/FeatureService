@@ -28,7 +28,7 @@
 var HyperSwitch = require('hyperswitch');
 var path = require('path');
 var assert = require('../../utils/assert.js');
-var fixtures = require('./fixtures.js');
+var searchFixtures = require('../search/fixtures.js');
 
 
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'fake-es.yaml'));
@@ -42,23 +42,20 @@ FES.prototype.query = function(hyper, req) {
 
     var body = req.body;
     var headers = req.headers;
-    var index = req.params.index;
     var method = req.params.method;
 
-    //console.log(fixtures.fakeEsResponse(fixtures.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"));
+    var fixtures = []
+        .concat(searchFixtures.values)
+        ;
 
 
-    var foundValue = fixtures.values.filter(value => {
+    var foundValue = fixtures.filter(value => {
         return  assert.isDeepEqual(JSON.parse(body), value.expectedEsQuery) *
-                assert.isDeepEqual(index,value.expectedEsIndex) *
                 assert.isDeepEqual(method,"_search") *
                 assert.isDeepEqual(headers,{ "Content-Type": "application/json" })
     });
 
     if (foundValue.length === 1) {
-            if (foundValue[0].esResult.status === 200){
-                foundValue[0].makeFsRes();
-            }
             return foundValue[0].esResult;
     } else {
         return {

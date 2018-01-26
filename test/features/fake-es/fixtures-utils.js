@@ -14,18 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 /*
- * EBDO-FeatureService fixtures used to test ES endpoints
+ * EBDO-FeatureService fixtures utils used to build the test data
  * Author: Alexandre Degurse
  *
  * fs stands for FeatureService
  */
 
-
+'use strict';
 
 
 /******************************************************************************
-                        fixtures utils functions
+                    Generic fixtures utils functions
 *****************************************************************************/
 
 
@@ -41,7 +42,7 @@ const fakeTimeserie = function(from,steps,stepDuration) {
             return {
                 timestamp: (new Date(fromDate.getTime() +
                     (idx * stepDuration * 1000))).toISOString(),
-                val: Math.random()
+                val: idx
             };
         })
     }
@@ -183,114 +184,9 @@ const fakeEsResponse = function(timeSerie,esIndex) {
     return esRes;
 }
 
-
-
-/******************************************************************************
-                            fixtures
-*****************************************************************************/
-
-var getAllFixtures = [
-
-    {
-        describe: 'return 200 and results for get-all with sample ts',
-        fsEndpoint: '/search/get-all',
-        expectedEsQuery: {"size":10000,"query":{"match_all":{}}},
-        expectedEsIndex: 'ebdo_data',
-        esResult: fakeEsResponse(fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
-        makeFsRes: function() {
-            this.expectedFSResult = {
-                status: 200,
-                body: {items: this.esResult.body.hits.hits.map((hit) => hit._source)}
-            };
-        }
-    }
-
-]
-
-var rangeQueryFixtures = [
-    {
-        describe: 'return 200 and results for range-query with sample ts',
-        fsEndpoint: '/search/range-query/2017-12-01T12:00:00.000Z/2017-12-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
-        expectedEsQuery: {
-            size: 10000,
-            query: {
-                range: {
-                    timestamp: {
-                        gte: "2017-12-01T12:00:00.000Z",
-                        lt: "2017-12-01T20:00:00.000Z"
-                    }
-                }
-            },
-            sort: [
-                { timestamp: { order: "asc" } }
-            ]
-        },
-        esResult: fakeEsResponse(fakeTimeserieTob("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
-        makeFsRes: function() {
-            this.expectedFSResult = {
-                status: 200,
-                body: {items: this.esResult.body.hits.hits.map((hit) => hit._source)}
-            };
-        }
-    },
-    {
-        describe: 'return 400 when no documents matches search parameters',
-        fsEndpoint: '/search/range-query/2048-11-01T12:00:00.000Z/2048-11-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
-        expectedEsQuery: {
-            size: 10000,
-            query: {
-                range: {
-                    timestamp: {
-                        gte: "2048-11-01T12:00:00.000Z",
-                        lt: "2048-11-01T20:00:00.000Z"
-                    }
-                }
-            },
-            sort: [
-                { timestamp: { order: "asc" } }
-            ]
-        },
-        esResult: makeEsShardError(),
-        get expectedFSResult() {
-            return {
-                status: 400,
-            };
-        }
-    },
-    {
-        describe: 'return 404 when no the index doesnt exist',
-        fsEndpoint: '/search/range-query/2049-11-01T12:00:00.000Z/2049-11-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
-        expectedEsQuery: {
-            size: 10000,
-            query: {
-                range: {
-                    timestamp: {
-                        gte: "2049-11-01T12:00:00.000Z",
-                        lt: "2049-11-01T20:00:00.000Z"
-                    }
-                }
-            },
-            sort: [
-                { timestamp: { order: "asc" } }
-            ]
-        },
-        esResult: makeEsIndexError(),
-        get expectedFSResult() {
-            return {
-                status: 404,
-            };
-        }
-    }
-]
-
 exports.fakeTimeserie = fakeTimeserie;
+exports.makeid = makeid;
+exports.makeEsShardError = makeEsShardError;
+exports.makeEsIndexError = makeEsIndexError;
+exports.fakeTimeserieTob = fakeTimeserieTob;
 exports.fakeEsResponse = fakeEsResponse;
-
-
-exports.values = []
-    .concat(getAllFixtures)
-    .concat(rangeQueryFixtures)
-    ;
