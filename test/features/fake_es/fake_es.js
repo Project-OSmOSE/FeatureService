@@ -31,7 +31,7 @@ var assert = require('../../utils/assert.js');
 var searchFixtures = require('../search/fixtures.js');
 
 
-var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'fake-es.yaml'));
+var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'fake_es.yaml'));
 
 // FES service
 function FES(options) {

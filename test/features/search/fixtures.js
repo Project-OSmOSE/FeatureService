@@ -22,7 +22,7 @@
  */
 'use strict';
 
-var FixtureUtils = require('../fake-es/fixtures-utils.js').FixtureUtils;
+var FixtureUtils = require('../fake_es/fixture_utils.js').FixtureUtils;
 
 
 

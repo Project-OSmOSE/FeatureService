@@ -21,7 +21,7 @@
 # A synthetic domain to test EBDO-FeatureService
 default_project: &default_project
   x-modules:
-    - path: test/fs-test-module.yaml
+    - path: test/fs_test_module.yaml
     - path: projects/feature_service_default.yaml
       options: &default_options
         elasticSearch:
