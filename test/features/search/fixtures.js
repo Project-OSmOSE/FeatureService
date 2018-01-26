@@ -22,8 +22,7 @@
  */
 'use strict';
 
-var fixturesUtils = require('../fake-es/fixtures-utils.js');
-
+var FixtureUtils = require('../fake-es/fixtures-utils.js').FixtureUtils;
 
 
 
@@ -37,10 +36,10 @@ var getAllFixtures = [
         fsEndpoint: '/search/get-all',
         expectedEsQuery: {"size":10000,"query":{"match_all":{}}},
         expectedEsIndex: 'ebdo_data',
-        esResult: fixturesUtils.fakeEsResponse(fixturesUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
+        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
         expectedFSResult: {
             status: 200,
-            body: fixturesUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
+            body: FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
         }
     }
 
@@ -65,10 +64,10 @@ var rangeQueryFixtures = [
                 { timestamp: { order: "asc" } }
             ]
         },
-        esResult: fixturesUtils.fakeEsResponse(fixturesUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
+        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
         expectedFSResult: {
             status: 200,
-            body: fixturesUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
+            body: FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
         }
     },
     {
@@ -89,7 +88,7 @@ var rangeQueryFixtures = [
                 { timestamp: { order: "asc" } }
             ]
         },
-        esResult: fixturesUtils.makeEsShardError(),
+        esResult: FixtureUtils.makeEsShardError(),
         expectedFSResult: {
                 status: 400,
         }
@@ -112,7 +111,7 @@ var rangeQueryFixtures = [
                 { timestamp: { order: "asc" } }
             ]
         },
-        esResult: fixturesUtils.makeEsIndexError(),
+        esResult: FixtureUtils.makeEsIndexError(),
         expectedFSResult: {
                 status: 404,
         }
