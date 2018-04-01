@@ -49,7 +49,6 @@ class Sound {
             body: fileSystem.createReadStream(filePath)
         };
 
-        // var readStream = fileSystem.createReadStream(filePath);
         return response;
     }
 }
