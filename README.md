@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # ODE Feature Service [![Build Status](https://travis-ci.org/Project-ODE/FeatureService.svg?branch=master)](https://travis-ci.org/Project-ODE/FeatureService)
+=======
+# ODE Feature Service [![Build Status](https://travis-ci.org/Project-EBDO/FeatureService.svg?branch=master)](https://travis-ci.org/Project-EBDO/FeatureService)
+>>>>>>> Change project name to ODE
 
 REST API for ODE features data
 
