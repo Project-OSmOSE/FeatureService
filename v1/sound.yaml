@@ -1,0 +1,111 @@
+# Copyright (C) 2017 Project-ODE
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Hyperswitch configuration for ODE-FeatureService api:sound endpoints
+# Author: Alexandre Degurse
+
+
+swagger: '2.0'
+info:
+  version: '1.0.0-beta'
+  title: ODE FeatureService Sound API
+  description: ODE FeatureService Sound API
+  termsofservice: TBD
+  contact:
+    name: ODE-Project Team
+    email: TBD
+    url: TBD
+  license:
+    name: GNU General Public Licence, v3
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+paths:
+  /:
+    get:
+      tags:
+        - ODE FeatureService Sound
+      summary: List ODE FeatureService API entry points
+      description: |
+        This is the root of the ODE FeatureService Sound
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The queriable sub-items
+          schema:
+            $ref: '#/definitions/listing'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-monitor: false
+
+  /{fileid}:
+    get:
+      tags:
+        - ODE FeatureService Sound
+      summary: Get a sound from v1
+      description: |
+        Get the sound that correspond to the given id.
+      produces:
+        - audio/x-wav
+      parameters:
+        - name: fileid
+          in: path
+          description: The identifier of the wanted sound
+          type: string
+          required: true
+      responses:
+        '200':
+          description: The sound that correspond to the given id.
+          content:
+            audio/x-wav:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      x-request-handler:
+        - get_from_backend:
+            request:
+              uri: /{domain}/sys/sound/{fileid}
+      x-monitor: false
+
+definitions:
+  # A https://tools.ietf.org/html/draft-nottingham-http-problem
+  problem:
+    required:
+      - type
+    properties:
+      type:
+        type: string
+      title:
+        type: string
+      detail:
+        type: string
+      instance:
+        type: string
+
+  listing:
+    description: The result format for listings
+    required:
+      - items
+    properties:
+      items:
+        type: array
+        items:
+          type: string
