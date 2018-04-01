@@ -24,7 +24,6 @@
 var HyperSwitch = require('hyperswitch');
 var path = require('path');
 var fileSystem = require('fs');
-var fsUtil = require('../lib/FeatureServiceUtil');
 
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'sound.yaml'));
 
