@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Project-EBDO
+/* Copyright (C) 2017 Project-ODE
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
- * EBDO-FeatureService Search functions
+ * ODE-FeatureService Search functions
  * Author: Alexandre Degurse
  */
 'use strict';
@@ -65,7 +65,7 @@ class Search {
 
     getAll(hyper) {
         // Requests Elasticsearch with an empty search at a given index
-        // ie: gets all documents at the default ebdo index
+        // ie: gets all documents at the default ode index
 
         var query = JSON.stringify({
             size: this.elasticSearch.maximumSize,

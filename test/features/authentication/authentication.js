@@ -1,5 +1,5 @@
 /*
- * EBDO-FeatureService Authentification tests
+ * ODE-FeatureService Authentification tests
  * Author: Erwan Keribin
  */
 'use strict';

@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Project-EBDO
+/* Copyright (C) 2017 Project-ODE
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
  */
 
 /*
- * EBDO-FeatureService fake-ES generic tester
+ * ODE-FeatureService fake-ES generic tester
  * Author: Alexandre Degurse
  */
 'use strict';

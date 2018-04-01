@@ -1,5 +1,5 @@
 /*
- * EBDO-FeatureService test server
+ * ODE-FeatureService test server
  * Widely adapted from Restbase
  * Author: Joseph Allemandou
  */
@@ -16,7 +16,7 @@ var yaml      = require('js-yaml');
 //var temp      = require('temp').track();
 
 var hostPort  = 'http://localhost:7231';
-var fsURL     = hostPort + '/data.ebdo.org/v1';
+var fsURL     = hostPort + '/data.ode.org/v1';
 
 function loadConfig(path) {
     var confString = fs.readFileSync(path).toString();

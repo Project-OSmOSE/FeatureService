@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Project-EBDO
+# Copyright (C) 2017 Project-ODE
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,18 +14,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# Hyperswitch configuration for EBDO-FeatureService api:authentication endpoints
+# Hyperswitch configuration for ODE-FeatureService api:authentication endpoints
 # Author: Erwan Keribin
 
 
 swagger: '2.0'
 info:
   version: '1.0.0-beta'
-  title: EBDO FeatureService Authentication API
-  description: EBDO FeatureService Authentication API
+  title: ODE FeatureService Authentication API
+  description: ODE FeatureService Authentication API
   termsofservice: TBD
   contact:
-    name: EBDO-Project Team
+    name: ODE-Project Team
     email: TBD
     url: TBD
   license:
@@ -35,7 +35,7 @@ paths:
   /authenticate:
     post:
       tags:
-        - EBDO FeatureService authentication function
+        - ODE FeatureService authentication function
       summary: Authenticate user
       description: |
         Authenticate user from credentials, returning a JWT token on authentication success
@@ -80,7 +80,7 @@ paths:
   /verify-token:
     get:
       tags:
-        - EBDO FeatureService decrypt token function
+        - ODE FeatureService decrypt token function
       summary: Example function that returns a decrypted authentication token
       description: |
         Takes a authentication token in header and returns it decrypted

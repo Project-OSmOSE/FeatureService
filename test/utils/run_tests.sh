@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# EBDO-FeatureService test runner
+# ODE-FeatureService test runner
 # Widely adapted from Restbase
 # Author: Joseph Allemandou
 #

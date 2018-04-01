@@ -1,5 +1,5 @@
 /*
- * EBDO-FeatureService Examples tests
+ * ODE-FeatureService Examples tests
  * Author: Joseph Allemandou
  */
 'use strict';

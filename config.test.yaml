@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Project-EBDO
+# Copyright (C) 2017 Project-ODE
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,20 +14,20 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# Test configuration for EBDO-FeatureService
+# Test configuration for ODE-FeatureService
 # Author: Joseph Allemandou
 
 
-# A synthetic domain to test EBDO-FeatureService
+# A synthetic domain to test ODE-FeatureService
 default_project: &default_project
   x-modules:
     - path: test/fs_test_module.yaml
     - path: projects/feature_service_default.yaml
       options: &default_options
         elasticSearch:
-          path: /data.ebdo.org/sys/fake-es/es
+          path: /data.ode.org/sys/fake-es/es
           maximumSize: 10000
-          index: ebdo_data
+          index: ode_data
         authentication:
           htpasswd: test/htpasswd
           secret: fake-test-secret
@@ -35,9 +35,9 @@ default_project: &default_project
 
 
 spec_root: &spec_root
-  title: "The EBDO FeatureService root"
+  title: "The ODE FeatureService root"
   paths:
-    /{domain:data.ebdo.org}: *default_project
+    /{domain:data.ode.org}: *default_project
 
 # Finally, a standard service-runner config.
 info:

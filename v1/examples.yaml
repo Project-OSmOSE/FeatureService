@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Project-EBDO
+# Copyright (C) 2017 Project-ODE
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,18 +14,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# Hyperswitch configuration for EBDO-FeatureService api:examples endpoints
+# Hyperswitch configuration for ODE-FeatureService api:examples endpoints
 # Author: Joseph Allemandou
 
 
 swagger: '2.0'
 info:
   version: '1.0.0-beta'
-  title: EBDO FeatureService Examples API
-  description: EBDO FeatureService Examples API
+  title: ODE FeatureService Examples API
+  description: ODE FeatureService Examples API
   termsofservice: TBD
   contact:
-    name: EBDO-Project Team
+    name: ODE-Project Team
     email: TBD
     url: TBD
   license:
@@ -35,10 +35,10 @@ paths:
   /:
     get:
       tags:
-        - EBDO FeatureService Examples
-      summary: List EBDO FeatureService API entry points
+        - ODE FeatureService Examples
+      summary: List ODE FeatureService API entry points
       description: |
-        This is the root of the EBDO FeatureService Examples
+        This is the root of the ODE FeatureService Examples
       produces:
         - application/json
       responses:
@@ -55,7 +55,7 @@ paths:
   /mean-fake-timeserie/{from}/{to}/{step}:
     get:
       tags:
-        - EBDO FeatureService Examples
+        - ODE FeatureService Examples
       summary: Get a fake timeserie from v1
       description: |
         Get the mean of a fake timeserie which contains random [0, 1[ values in [from, to[ interval by step
@@ -96,7 +96,7 @@ paths:
   /fake-timeserie/{from}/{to}/{step}:
     get:
       tags:
-        - EBDO FeatureService Examples
+        - ODE FeatureService Examples
       summary: Get a fake timeserie
       description: |
         Get a fake timeserie with random [0, 1[ values in [from, to[ interval by step
@@ -137,7 +137,7 @@ paths:
   /authentified-fake-timeserie/{from}/{to}/{step}:
     get:
       tags:
-        - EBDO FeatureService Examples
+        - ODE FeatureService Examples
       summary: Get a fake timeserie protected with token
       description: |
         Get a fake timeserie with random [0, 1[ values in [from, to[ interval by step

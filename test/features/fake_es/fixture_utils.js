@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Project-EBDO
+/* Copyright (C) 2017 Project-ODE
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 
 /*
- * EBDO-FeatureService fixtures utils used to build the test data
+ * ODE-FeatureService fixtures utils used to build the test data
  * Author: Alexandre Degurse
  *
  * fs stands for FeatureService
@@ -71,14 +71,14 @@ class FixtureUtils {
                         type: 'query_shard_exception',
                         reason: 'Some reason',
                         index_uuid: FixtureUtils.makeid(),
-                        index: 'ebdo_data' } ],
+                        index: 'ode_data' } ],
                     type: 'search_phase_execution_exception',
                     reason: 'all shards failed',
                     phase: 'query',
                     grouped: true,
                     failed_shards: [{
                         shard: 0,
-                        index: 'ebdo_data',
+                        index: 'ode_data',
                         node: FixtureUtils.makeid(),
                         reason: [{
                             type: 'query_shard_exception',

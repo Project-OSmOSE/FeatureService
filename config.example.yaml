@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Project-EBDO
+# Copyright (C) 2017 Project-ODE
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# EBDO FeatureService example config
+# ODE FeatureService example config
 # Author: Joseph Allemandou
 
 
@@ -27,7 +27,7 @@ feature_service_project: &feature_service_project
           host: localhost
           port: 9200
           maximumSize: 1000
-          index: ebdo_data
+          index: ode_data
         authentication:
           # You can generate a new password file with htpasswd utility:
           # htpasswd -cBC 10 htpasswd login
@@ -39,7 +39,7 @@ feature_service_project: &feature_service_project
 
 # Swagger spec root.
 spec: &spec_root
-  title: "The EBDO FeatureService root"
+  title: "The ODE FeatureService root"
   x-sub-request-filters:
     - type: default
       name: http
@@ -48,7 +48,7 @@ spec: &spec_root
           - pattern: /^http:\/\/localhost:9200\/.*/
             forward_headers: true
   paths:
-    /{domain:data.ebdo.org}: *feature_service_project
+    /{domain:data.ode.org}: *feature_service_project
 
 # The main service setup. Each worker can offer one or more services.
 services:

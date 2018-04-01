@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Project-EBDO
+/* Copyright (C) 2017 Project-ODE
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  */
 
 /*
- * EBDO-FeatureService fixtures used to test ES endpoints
+ * ODE-FeatureService fixtures used to test ES endpoints
  * Author: Alexandre Degurse
  *
  * fs stands for FeatureService
@@ -35,8 +35,8 @@ var getAllFixtures = [
         describe: 'return 200 and results for get-all with sample ts',
         fsEndpoint: '/search/get-all',
         expectedEsQuery: {"size":10000,"query":{"match_all":{}}},
-        expectedEsIndex: 'ebdo_data',
-        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
+        expectedEsIndex: 'ode_data',
+        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ode_data"),
         expectedFSResult: {
             status: 200,
             body: FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
@@ -49,7 +49,7 @@ var rangeQueryFixtures = [
     {
         describe: 'return 200 and results for range-query with sample ts',
         fsEndpoint: '/search/range-query/2017-12-01T12:00:00.000Z/2017-12-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
+        expectedEsIndex: 'ode_data',
         expectedEsQuery: {
             size: 10000,
             query: {
@@ -64,7 +64,7 @@ var rangeQueryFixtures = [
                 { timestamp: { order: "asc" } }
             ]
         },
-        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ebdo_data"),
+        esResult: FixtureUtils.fakeEsResponse(FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60),"ode_data"),
         expectedFSResult: {
             status: 200,
             body: FixtureUtils.fakeTimeserie("2017-12-01T12:00:00.000Z",120,60)
@@ -73,7 +73,7 @@ var rangeQueryFixtures = [
     {
         describe: 'return 400 when no documents matches search parameters',
         fsEndpoint: '/search/range-query/2048-11-01T12:00:00.000Z/2048-11-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
+        expectedEsIndex: 'ode_data',
         expectedEsQuery: {
             size: 10000,
             query: {
@@ -96,7 +96,7 @@ var rangeQueryFixtures = [
     {
         describe: 'return 404 when no the index doesnt exist',
         fsEndpoint: '/search/range-query/2049-11-01T12:00:00.000Z/2049-11-01T20:00:00.000Z',
-        expectedEsIndex: 'ebdo_data',
+        expectedEsIndex: 'ode_data',
         expectedEsQuery: {
             size: 10000,
             query: {

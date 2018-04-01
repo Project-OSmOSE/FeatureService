@@ -1,5 +1,5 @@
 /*
- * EBDO-FeatureService Authentification from file tests
+ * ODE-FeatureService Authentification from file tests
  * Author: Joseph Allemandou
  */
 'use strict';

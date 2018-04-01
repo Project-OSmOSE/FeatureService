@@ -1,6 +1,6 @@
-# EBDO Feature Service [![Build Status](https://travis-ci.org/Project-EBDO/FeatureService.svg?branch=master)](https://travis-ci.org/Project-EBDO/FeatureService)
+# ODE Feature Service [![Build Status](https://travis-ci.org/Project-EBDO/FeatureService.svg?branch=master)](https://travis-ci.org/Project-EBDO/FeatureService)
 
-REST API for EBDO features data
+REST API for ODE features data
 
 Adapted from [Restbase](https://github.com/wikimedia/restbase)
 
@@ -58,4 +58,3 @@ npm run-script coverage
 ```
 
 The coverage report can now be found in *&lt;project&gt;/coverage/lcov-report/index.html*.
-

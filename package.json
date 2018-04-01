@@ -1,7 +1,7 @@
 {
-  "name": "EBDO-FeatureService",
+  "name": "ODE-FeatureService",
   "version": "0.1.0",
-  "description": "EBDO FeatureService",
+  "description": "ODE FeatureService",
   "main": "lib/server.js",
   "scripts": {
     "start": "service-runner",
@@ -14,10 +14,10 @@
     "url": "https://github.com/Project-EBDO/FeatureService.git"
   },
   "keywords": [
-    "EBDO",
+    "ODE",
     "FeatureService"
   ],
-  "author": "EBDO-Project Team",
+  "author": "ODE-Project Team",
   "license": "GPL-3.0",
   "dependencies": {
     "bluebird": "^3.5.0",

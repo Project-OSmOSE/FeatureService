@@ -1,4 +1,4 @@
-/* Copyright (C) 2017 Project-EBDO
+/* Copyright (C) 2017 Project-ODE
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * Check received query against known ones using fixtures files
  * and sends data or error back.
  *
- * EBDO-FeatureService fake-ES test endpoint
+ * ODE-FeatureService fake-ES test endpoint
  * Author: Alexandre Degurse
  */
 'use strict';
