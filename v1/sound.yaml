@@ -64,7 +64,7 @@ paths:
       parameters:
         - name: fileid
           in: path
-          description: The identifier of the wanted sound
+          description: The identifier of the wanted sound (for now, its name)
           type: string
           required: true
       responses:
