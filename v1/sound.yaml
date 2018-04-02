@@ -82,7 +82,7 @@ paths:
       x-request-handler:
         - get_from_backend:
             request:
-              uri: /{domain}/sys/sound/{fileid}
+              uri: /{domain}/sys/test/sound/{fileid}
       x-monitor: false
 
 definitions:

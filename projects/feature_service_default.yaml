@@ -38,7 +38,7 @@ paths:
             /search:
               x-modules:
                 - path: v1/search.yaml
-            /sound:
+            /test/sound:
               x-modules:
                 - path: v1/sound.yaml
 
@@ -54,7 +54,7 @@ paths:
             /examples:
               x-modules:
                 - path: sys/examples.js
-            /sound:
+            /test/sound:
               x-modules:
                 - path: sys/sound.js
             /search:
