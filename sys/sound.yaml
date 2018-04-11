@@ -19,6 +19,12 @@
 
 
 paths:
+  /:
+      get:
+        summary: List sound files
+        operationId: listSound
+
+
   /{fileid}:
       get:
         summary: Get a sound file

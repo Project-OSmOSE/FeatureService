@@ -49,6 +49,18 @@ class Sound {
 
         return response;
     }
+
+    listSound() {
+
+        var files = fileSystem.readdirSync(path.join(__dirname, "../test/annotator/wav"));
+
+        var response = {
+            status: 200,
+            body: files
+        };
+
+        return response;
+    }
 }
 
 module.exports = function(options) {
@@ -57,7 +69,8 @@ module.exports = function(options) {
     return {
         spec: spec,
         operations: {
-            getSound: sound.getSound.bind(sound)
+            getSound: sound.getSound.bind(sound),
+            listSound: sound.listSound.bind(sound)
         }
     };
 };
