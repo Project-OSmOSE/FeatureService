@@ -24,6 +24,7 @@
 var HyperSwitch = require('hyperswitch');
 var path = require('path');
 var fileSystem = require('fs');
+const HTTPError = HyperSwitch.HTTPError;
 
 var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'sound.yaml'));
 
@@ -35,7 +36,20 @@ class Sound {
 
     getSound(hyper, req) {
 
-        var filePath = path.join(__dirname, `../test/annotator/wav/${req.params.fileid}.wav`);
+        var filePath = path.join(__dirname, `../test/annotator/wav/${req.params.fileid}`);
+
+        var resquestExists = fileSystem.existsSync(filePath);
+        if (!resquestExists) {
+            // return 404 if requested wav doesn't exist
+            throw new HTTPError({
+                status: 404,
+                body: {
+                    type: 'ENOENT',
+                    detail: 'no such file',
+                }
+            });
+        }
+
         var stat = fileSystem.statSync(filePath);
 
         var response = {
