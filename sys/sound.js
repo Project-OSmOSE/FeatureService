@@ -36,9 +36,10 @@ class Sound {
 
     getSound(hyper, req) {
 
-        var filePath = path.join(__dirname, `../test/annotator/wav/${req.params.fileid}`);
+        var filePath = path.join(__dirname, `../test/annotator/wav/${req.params.soundId}`);
 
         var resquestExists = fileSystem.existsSync(filePath);
+
         if (!resquestExists) {
             // return 404 if requested wav doesn't exist
             throw new HTTPError({

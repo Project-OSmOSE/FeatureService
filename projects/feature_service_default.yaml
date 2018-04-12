@@ -54,12 +54,12 @@ paths:
             /examples:
               x-modules:
                 - path: sys/examples.js
-            /test/sound:
-              x-modules:
-                - path: sys/sound.js
             /search:
               x-modules:
                 - path: sys/search.js
                   options:
                     elasticSearch: '{{options.elasticSearch}}'
+            /test/sound:
+              x-modules:
+                - path: sys/sound.js
         options: '{{options}}'

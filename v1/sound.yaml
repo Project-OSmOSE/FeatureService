@@ -37,7 +37,7 @@ paths:
     get:
       tags:
         - ODE FeatureService Sound
-      summary: List ODE FeatureService API entry points
+      summary: List the available sounds in FeatureService
       description: |
         This is the root of the ODE FeatureService Sound
       produces:
@@ -56,7 +56,7 @@ paths:
       x-monitor: false
 
 
-  /{fileid}:
+  /{soundId}:
     get:
       tags:
         - ODE FeatureService Sound
@@ -66,7 +66,7 @@ paths:
       produces:
         - audio/x-wav
       parameters:
-        - name: fileid
+        - name: soundId
           in: path
           description: The identifier of the wanted sound (for now, its name)
           type: string
@@ -86,7 +86,7 @@ paths:
       x-request-handler:
         - get_from_backend:
             request:
-              uri: /{domain}/sys/test/sound/{fileid}
+              uri: /{domain}/sys/test/sound/{soundId}
       x-monitor: false
 
 definitions:
