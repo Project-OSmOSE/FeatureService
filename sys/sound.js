@@ -15,7 +15,7 @@
  */
 
 /*
- * ODE-FeatureService sound functions
+ * ODE-FeatureService sound services
  * Author: Alexandre Degurse
  */
 
@@ -32,11 +32,12 @@ var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'sound.yaml'));
 class Sound {
     constructor(options) {
         this.options = options;
+        this.basePath = "../resources/annotator/wav";
     }
 
     getSound(hyper, req) {
 
-        var filePath = path.join(__dirname, `../resources/annotator/wav/${req.params.soundId}`);
+        var filePath = path.join(__dirname, this.basePath + "/" + req.params.soundId);
 
         var resquestExists = fileSystem.existsSync(filePath);
 
@@ -67,7 +68,9 @@ class Sound {
 
     listSound() {
 
-        var files = fileSystem.readdirSync(path.join(__dirname, "../resources/annotator/wav"));
+        var dirPath = path.join(__dirname, this.basePath);
+
+        var files = fileSystem.readdirSync(dirPath);
 
         var response = {
             status: 200,
