@@ -32,12 +32,12 @@ var spec = HyperSwitch.utils.loadSpec(path.join(__dirname, 'sound.yaml'));
 class Sound {
     constructor(options) {
         this.options = options;
-        this.basePath = "../resources/annotator/wav";
+        this.wavBasePath = "../resources/annotator/wav";
     }
 
     getSound(hyper, req) {
 
-        var filePath = path.join(__dirname, this.basePath + "/" + req.params.soundId);
+        var filePath = path.join(__dirname, this.wavBasePath, req.params.soundId);
 
         var resquestExists = fileSystem.existsSync(filePath);
 
@@ -68,7 +68,7 @@ class Sound {
 
     listSound() {
 
-        var dirPath = path.join(__dirname, this.basePath);
+        var dirPath = path.join(__dirname, this.wavBasePath);
 
         var files = fileSystem.readdirSync(dirPath);
 
