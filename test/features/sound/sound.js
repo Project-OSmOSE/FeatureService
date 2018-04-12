@@ -26,7 +26,7 @@ describe('sound endpoints', function() {
         }).then(function(res) {
             var sound = res.body;
 
-            var filePath = path.join(__dirname, '../../annotator/wav/paris.wav');
+            var filePath = path.join(__dirname, '../../../resources/annotator/wav/paris.wav');
             var expectedSound = fileSystem.readFileSync(filePath);
 
             assert.deepEqual(sound, expectedSound);

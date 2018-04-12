@@ -36,7 +36,7 @@ class Sound {
 
     getSound(hyper, req) {
 
-        var filePath = path.join(__dirname, `../test/annotator/wav/${req.params.soundId}`);
+        var filePath = path.join(__dirname, `../resources/annotator/wav/${req.params.soundId}`);
 
         var resquestExists = fileSystem.existsSync(filePath);
 
@@ -67,7 +67,7 @@ class Sound {
 
     listSound() {
 
-        var files = fileSystem.readdirSync(path.join(__dirname, "../test/annotator/wav"));
+        var files = fileSystem.readdirSync(path.join(__dirname, "../resources/annotator/wav"));
 
         var response = {
             status: 200,
