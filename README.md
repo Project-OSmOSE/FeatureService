@@ -1,6 +1,5 @@
 # ODE Feature Service [![Build Status](https://travis-ci.org/Project-ODE/FeatureService.svg?branch=master)](https://travis-ci.org/Project-ODE/FeatureService)
 
-
 REST API for ODE features data
 
 Adapted from [Restbase](https://github.com/wikimedia/restbase)
