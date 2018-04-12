@@ -22,7 +22,7 @@ describe('sound endpoints', function() {
 
     it('should return 200 with the requested wav file', function() {
         return preq.get({
-            uri: server.config.fsURL + endpoint + '/paris.wav'
+            uri: server.config.fsURL + endpoint + '/paris.wav/play'
         }).then(function(res) {
             var sound = res.body;
 
@@ -35,7 +35,7 @@ describe('sound endpoints', function() {
 
     it('should return 404 when requested wav file doesn\'t exist', function() {
         return preq.get({
-            uri: server.config.fsURL + endpoint + '/wavFileThatDontExist.wav'
+            uri: server.config.fsURL + endpoint + '/wavFileThatDontExist.wav/play'
         }).then(function() {
             throw 'Should not succeed'
         }).catch(function(res) {

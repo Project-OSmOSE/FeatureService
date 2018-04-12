@@ -56,7 +56,7 @@ paths:
       x-monitor: false
 
 
-  /{soundId}:
+  /{soundId}/play:
     get:
       tags:
         - ODE FeatureService Sound
@@ -86,7 +86,7 @@ paths:
       x-request-handler:
         - get_from_backend:
             request:
-              uri: /{domain}/sys/test/sound/{soundId}
+              uri: /{domain}/sys/test/sound/{soundId}/play
       x-monitor: false
 
 definitions:

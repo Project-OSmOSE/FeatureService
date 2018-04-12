@@ -25,7 +25,7 @@ paths:
         operationId: listSound
 
 
-  /{soundId}:
+  /{soundId}/play:
       get:
         summary: Get a sound file
         operationId: getSound
