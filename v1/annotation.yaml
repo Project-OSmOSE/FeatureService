@@ -153,49 +153,6 @@ paths:
               uri: /{domain}/sys/test/annotation/labels/{labelId}
       x-monitor: false
 
-    # post:
-      # tags:
-      #   - ODE FeatureService Annotation
-      # summary: Submit labels
-      # description: |
-      #   User sends annotations
-      # produces:
-      #   - application/json
-      # parameters:
-      #   - name: tags-set-id
-      #     in: path
-      #     description: Identifies the file where the labels are stored
-      #     type: string
-      #     required: true
-      #   - name: annotation
-      #     in: formData
-      #     description: User's annotation
-      #     type: array
-      #     required: true
-      # responses:
-      #   '200':
-      #     description: session token
-      #     schema:
-      #       $ref: '#/definitions/token'
-      #   '401':
-      #     description:  authentication problem
-      #     schema:
-      #       $ref: '#/definitions/problem'
-      #   default:
-      #     description: Error
-      #     schema:
-      #       $ref: '#/definitions/problem'
-      # x-request-handler:
-      #   - post_to_backend:
-      #       request:
-      #         method: post
-      #         uri: /{domain}/sys/annotation/new/{file-set-id}
-      #         headers:
-      #           content-type: multipart/form-data
-      #         body:
-      #           annotation: '{{annotation}}'
-      # x-monitor: false
-
 definitions:
   # A https://tools.ietf.org/html/draft-nottingham-http-problem
   problem:
