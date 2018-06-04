@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - '6'
-  - node
 sudo: false
 script: sh test/utils/run_tests.sh coverage all && (npm run-script coveralls || exit 0)
 notifications:
