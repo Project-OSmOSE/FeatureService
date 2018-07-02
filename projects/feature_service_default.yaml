@@ -41,6 +41,9 @@ paths:
             /test/sound:
               x-modules:
                 - path: v1/sound.yaml
+            /test/annotation:
+              x-modules:
+                - path: v1/annotation.yaml
 
   /{api:sys}:
     x-modules:
@@ -62,4 +65,7 @@ paths:
             /test/sound:
               x-modules:
                 - path: sys/sound.js
+            /test/annotation:
+              x-modules:
+                - path: sys/annotation.js
         options: '{{options}}'
