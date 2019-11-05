@@ -326,6 +326,8 @@ definitions:
             type: number
       audioUrl:
         type: string
+      audioRate:
+        type: number
       spectroUrls:
         type: array
         items:

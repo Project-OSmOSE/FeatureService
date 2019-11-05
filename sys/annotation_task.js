@@ -154,6 +154,7 @@ class AnnotationTask {
                                     endFrequency: sampleRate / 2
                                 },
                                 audioUrl: audioUrl,
+                                audioRate: sampleRate,
                                 spectroUrls: allSpectroUrls,
                                 prevAnnotations: prevAnnotations
                             }
