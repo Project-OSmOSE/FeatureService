@@ -64,7 +64,7 @@ exports.up = knex => {
             table.dateTime('end');
             table.integer('num_channels');
             table.double('sample_rate_khz');
-            table.integer('total_samples');
+            table.bigInteger('total_samples');
             table.integer('sample_bits');
             table.double('gain_db');
             table.double('gain_rel');
